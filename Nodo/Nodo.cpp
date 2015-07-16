@@ -4,11 +4,13 @@ Nodo::Nodo()
 {
 	id = 0;
 	nodo = NULL;
+	free = false;
 }
 
-Nodo::Nodo(string _value)
+Nodo::Nodo(string _name)
 {
-	value = _value;
+	name = _name;
+	free = false;
 }
 
 int Nodo::GetId()
@@ -31,14 +33,54 @@ void Nodo::SetNodo(Nodo *_nodo)
 	nodo = _nodo;
 }
 
-string Nodo::GetValue()
+string Nodo::GetName()
 {
-	return value;
+	return name;
 }
 
-void Nodo::SetValue(string _value)
+void Nodo::SetName(string _name)
 {
-	value = _value;
+	name = _name;
+}
+
+string Nodo::GetCountry()
+{
+	return country;
+}
+
+void Nodo::SetCountry(string _country)
+{
+	country = _country;
+}
+
+string Nodo::GetDate()
+{
+	return date;
+}
+
+void Nodo::SetDate(string _date)
+{
+	date = _date;
+}
+
+string Nodo::GetType()
+{
+	return type;
+}
+
+void Nodo::SetType(string _type)
+{
+	type = _type;
+}
+
+bool Nodo::GetFree()
+{
+	return free;
+}
+
+void Nodo::SetFree(bool _free)
+{
+	free = _free;
 }
 
 Nodo::~Nodo()

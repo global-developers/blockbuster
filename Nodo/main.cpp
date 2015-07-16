@@ -16,68 +16,73 @@ using std::cout;
 using std::endl;
 using std::string;
 
+void addNodo(List*, Nodo*);
+
 int main()
 {
 	char opc;
+	
 	int id;
 	string value;
+	
 	Nodo *nodos = NULL;
 	Nodo *aux = NULL;
+	
 	List *list = new List();
 
+	home();
+
 	do {
+		
 		opc = menu();
 		system("cls");
+		
 		switch(opc)
 		{
 			case '1':
-				aux = new Nodo();
-				cout << "Ingrese una valor: ";
-				cin >> value;
-				aux->SetValue(value);
-				list->Add(aux);
+				addNodo(list, aux);
 			break;
+			
 			case '2':
+				
 				nodos = list->GetFirst();
 				id = 0;
-				cout << "+------+-----------------------------------------------+" << endl;
-				cout << "|   id | value                                         |" << endl;
-				cout << "+------+-----------------------------------------------+" << endl;
+
+				header();
+				
 				while(nodos != NULL)
 				{
-					cout << "| " << setiosflags(ios::right) << setw(4) << nodos->GetId()
-						 << " | " << resetiosflags(ios::right) << setiosflags(ios::left) << setw(45) << nodos->GetValue()
-						 << " |" << endl;
+					print_nodo(nodos);
 					nodos = nodos->GetNodo();
 					id++;
 				}
+				
 				if(id == 0)
-					cout << "| NULL                                                 |" << endl;
-				cout << "+------------------------------------------------------+" << endl;
+					print_empty();
+			
+				footer();
+			
 			break;
+			
 			case '3':
-				cout << "Ingrese el \"id\" del nodo a buscar: ";
+				
+				cout << "Ingrese el \"id\" de la pelicula a buscar: ";
 				cin >> id;
-
 
 				aux = list->FindId(id);
 
-				cout << "+------+-----------------------------------------------+" << endl;
-				cout << "|   id | value                                         |" << endl;
-				cout << "+------+-----------------------------------------------+" << endl;
+				header();
 
 				if(aux != NULL)
-				{
-					cout << "| " << setiosflags(ios::right) << setw(4) << aux->GetId()
-						 << " | " << resetiosflags(ios::right) << setiosflags(ios::left) << setw(45) << aux->GetValue()
-						 << " |" << endl;
-				} else 
-					cout << "| NULL                                                 |" << endl;
-				cout << "+------------------------------------------------------+" << endl;
+					print_nodo(aux);
+				else
+					print_empty();
+
+				footer();
 
 			break;
 			case '4':
-				cout << "Ingrese el \"id\" del nodo a eliminar: ";
+				cout << "Ingrese el \"id\" de la pelicula a eliminar: ";
 				cin >> id;
 				list->DeleteFindId(id);
 			break;
@@ -90,10 +95,36 @@ int main()
 			break;
 		}
 
+		cout << "Presione enter para continuar...";
 		getch();
 		system("cls");
 
 	} while(opc != '5');
 
 	return 0;
+}
+
+void addNodo(List * list, Nodo * aux)
+{
+	aux = new Nodo();
+	string value;
+
+	cout << "Nombre : ";
+	cin >> value;
+	aux->SetName(value);
+	
+	cout << "País: ";
+	cin >> value;
+	aux->SetCountry(value);
+
+	cout << "Año: ";
+	cin >> value;
+	aux->SetDate(value);
+	
+	cout << "Categoria: ";
+	cin >> value;
+	aux->SetType(value);
+	
+	list->Add(aux);
+	cout << "Se ha agregado correctamente!" << endl;
 }
